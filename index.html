@@ -43,14 +43,20 @@
   </div>
   
 
-      <!-- STEP 3: Upload Logo -->
+     <!-- STEP 3: Upload Logo -->
 <div class="form-step" id="step3">
-    <h2>Upload Logo Tim</h2>
-    <input type="file" id="logoUpload" accept=".jpg,.jpeg,.png" required />
-    <small class="error"></small>
-    <button type="button" onclick="prevStep(2)">Back</button>
-    <button type="submit">Daftarkan</button>
-  </div>
+  <h2>Upload Logo Tim</h2>
+  <input type="file" id="logoUpload" accept=".jpg,.jpeg,.png" required />
+  <small class="error"></small>
+
+  <button type="button" onclick="prevStep(2)" id="backBtn">Back</button>
+  <button type="submit" id="submitBtn">
+    <span class="btn-text">Daftarkan</span>
+    <span class="loader"></span>
+  </button>
+</div>
+
+
   
       <!-- STEP 4: Konfirmasi -->
       <div class="form-step" id="step4">

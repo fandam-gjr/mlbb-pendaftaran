@@ -58,34 +58,48 @@ function validateStep(step) {
 
   return !valid;
 }
-
-// 🟩 Submit Form
 document.getElementById('registrationForm').addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  // ✅ Validasi Step 3 secara manual lagi sebelum submit
-  const step3Valid = !validateStep(3);
-  if (!step3Valid) return;
+  // Validasi Step 3
+  if (!validateStep(3)) return;
+
+  const submitBtn = document.getElementById('submitBtn');
+  const backBtn = document.getElementById('backBtn');
+  const btnText = submitBtn.querySelector('.btn-text');
+  const loader = submitBtn.querySelector('.loader');
+
+  // Loading animasi
+  submitBtn.disabled = true;
+  backBtn.style.display = 'none';
+  btnText.style.display = 'none';
+  loader.style.display = 'inline-block';
 
   const logo = document.getElementById('logoUpload').files[0];
-
-  // Upload logo ke imgbb
   const imageData = new FormData();
   imageData.append("image", logo);
 
-  const imgurUrl = await fetch('https://api.imgbb.com/1/upload?key=42eb1f905526b4f8d2b1355dedc76083', {
-    method: "POST",
-    body: imageData
-  })
-    .then(res => res.json())
-    .then(data => data.data.url)
-    .catch(() => {
-      document.querySelector('#step3 .error').textContent = "Gagal upload logo.";
-      return null;
+  // Upload gambar ke Imgbb
+  let imgurUrl = null;
+  try {
+    const res = await fetch('https://api.imgbb.com/1/upload?key=42eb1f905526b4f8d2b1355dedc76083', {
+      method: "POST",
+      body: imageData
     });
+    const data = await res.json();
+    imgurUrl = data.data.url;
+  } catch {
+    document.querySelector('#step3 .error').textContent = "Gagal upload logo.";
+    submitBtn.disabled = false;
+    backBtn.style.display = 'inline-block';
+    btnText.style.display = 'inline';
+    loader.style.display = 'none';
+    return;
+  }
 
   if (!imgurUrl) return;
 
+  // Siapkan data ke Discord
   const payload = {
     content: "**Pendaftaran Baru!**",
     embeds: [{
@@ -99,12 +113,14 @@ document.getElementById('registrationForm').addEventListener('submit', async (e)
     }]
   };
 
+  // Kirim ke Discord Webhook
   await fetch("https://discord.com/api/webhooks/1358075307764093130/y5kH7hNHu5BP-uoo52NghzYB0dIQUBQPo8gqr7_uUipy5LAo--y5LSzSbbvOQ8CG4sMJ", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)
   });
 
+  // Pindah ke step terakhir
   currentStep = 4;
   showStep(currentStep);
 });
