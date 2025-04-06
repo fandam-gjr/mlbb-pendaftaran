@@ -1,5 +1,4 @@
 let currentStep = 1;
-const totalSteps = 4;
 
 function showStep(step) {
   document.querySelectorAll('.form-step').forEach((el, i) => {
@@ -58,10 +57,10 @@ function validateStep(step) {
 
   return !valid;
 }
+
 document.getElementById('registrationForm').addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  // Validasi Step 3
   if (!validateStep(3)) return;
 
   const submitBtn = document.getElementById('submitBtn');
@@ -69,7 +68,6 @@ document.getElementById('registrationForm').addEventListener('submit', async (e)
   const btnText = submitBtn.querySelector('.btn-text');
   const loader = submitBtn.querySelector('.loader');
 
-  // Loading animasi
   submitBtn.disabled = true;
   backBtn.style.display = 'none';
   btnText.style.display = 'none';
@@ -79,7 +77,6 @@ document.getElementById('registrationForm').addEventListener('submit', async (e)
   const imageData = new FormData();
   imageData.append("image", logo);
 
-  // Upload gambar ke Imgbb
   let imgurUrl = null;
   try {
     const res = await fetch('https://api.imgbb.com/1/upload?key=42eb1f905526b4f8d2b1355dedc76083', {
@@ -99,7 +96,6 @@ document.getElementById('registrationForm').addEventListener('submit', async (e)
 
   if (!imgurUrl) return;
 
-  // Siapkan data ke Discord
   const payload = {
     content: "**Pendaftaran Baru!**",
     embeds: [{
@@ -113,14 +109,12 @@ document.getElementById('registrationForm').addEventListener('submit', async (e)
     }]
   };
 
-  // Kirim ke Discord Webhook
   await fetch("https://discord.com/api/webhooks/1358075307764093130/y5kH7hNHu5BP-uoo52NghzYB0dIQUBQPo8gqr7_uUipy5LAo--y5LSzSbbvOQ8CG4sMJ", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)
   });
 
-  // Pindah ke step terakhir
   currentStep = 4;
   showStep(currentStep);
 });

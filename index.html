@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pendaftaran MLBB</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
@@ -18,46 +18,42 @@
         <button type="button" onclick="nextStep(1)">Next</button>
       </div>
 
-      <!-- STEP 2: Daftar Anggota -->
-<div class="form-step" id="step2">
-    <h2>Anggota Tim</h2>
-    <div class="player-list">
-      <input type="text" placeholder="Nama Discord Player 1" class="discord" required />
-      <input type="text" placeholder="ID MLBB Player 1" class="mlbb" required />
-  
-      <input type="text" placeholder="Nama Discord Player 2" class="discord" required />
-      <input type="text" placeholder="ID MLBB Player 2" class="mlbb" required />
-  
-      <input type="text" placeholder="Nama Discord Player 3" class="discord" required />
-      <input type="text" placeholder="ID MLBB Player 3" class="mlbb" required />
-  
-      <input type="text" placeholder="Nama Discord Player 4" class="discord" required />
-      <input type="text" placeholder="ID MLBB Player 4" class="mlbb" required />
-  
-      <input type="text" placeholder="Nama Discord Player 5" class="discord" required />
-      <input type="text" placeholder="ID MLBB Player 5" class="mlbb" required />
-    </div>
-    <small class="error"></small>
-    <button type="button" onclick="prevStep(1)">Back</button>
-    <button type="button" onclick="nextStep(2)">Next</button>
-  </div>
-  
+      <!-- STEP 2: Anggota Tim -->
+      <div class="form-step" id="step2">
+        <h2>Anggota Tim</h2>
+        <div class="player-list">
+          <input type="text" placeholder="Nama Discord Player 1" class="discord" required />
+          <input type="text" placeholder="ID MLBB Player 1" class="mlbb" required />
 
-     <!-- STEP 3: Upload Logo -->
-<div class="form-step" id="step3">
-  <h2>Upload Logo Tim</h2>
-  <input type="file" id="logoUpload" accept=".jpg,.jpeg,.png" required />
-  <small class="error"></small>
+          <input type="text" placeholder="Nama Discord Player 2" class="discord" required />
+          <input type="text" placeholder="ID MLBB Player 2" class="mlbb" required />
 
-  <button type="button" onclick="prevStep(2)" id="backBtn">Back</button>
-  <button type="submit" id="submitBtn">
-    <span class="btn-text">Daftarkan</span>
-    <span class="loader"></span>
-  </button>
-</div>
+          <input type="text" placeholder="Nama Discord Player 3" class="discord" required />
+          <input type="text" placeholder="ID MLBB Player 3" class="mlbb" required />
 
+          <input type="text" placeholder="Nama Discord Player 4" class="discord" required />
+          <input type="text" placeholder="ID MLBB Player 4" class="mlbb" required />
 
-  
+          <input type="text" placeholder="Nama Discord Player 5" class="discord" required />
+          <input type="text" placeholder="ID MLBB Player 5" class="mlbb" required />
+        </div>
+        <small class="error"></small>
+        <button type="button" onclick="prevStep(1)">Back</button>
+        <button type="button" onclick="nextStep(2)">Next</button>
+      </div>
+
+      <!-- STEP 3: Upload Logo -->
+      <div class="form-step" id="step3">
+        <h2>Upload Logo Tim</h2>
+        <input type="file" id="logoUpload" accept=".jpg,.jpeg,.png" required />
+        <small class="error"></small>
+        <button type="button" onclick="prevStep(2)" id="backBtn">Back</button>
+        <button type="submit" id="submitBtn">
+          <span class="btn-text">Daftarkan</span>
+          <span class="loader"></span>
+        </button>
+      </div>
+
       <!-- STEP 4: Konfirmasi -->
       <div class="form-step" id="step4">
         <h2>Terima kasih!</h2>
